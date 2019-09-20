@@ -1,6 +1,6 @@
 {
   "name": "couchdb-query-helper",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A module to help query couch DB in node applications",
   "main": "index.js",
   "scripts": {
@@ -11,5 +11,22 @@
   "dependencies": {
     "axios": "^0.19.0",
     "mocha": "^6.2.0"
+  },
+  "keywords": [
+    "couchdb",
+    "node",
+    "query",
+    "query builder",
+    "schema builder",
+    "database manager"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rajcrk/couchdb-query-helper"
+  },
+  "homepage": "https://github.com/rajcrk/couchdb-query-helper",
+  "bugs": {
+    "url": "https://github.com/rajcrk/couchdb-query-helper/issues",
+    "email": "rajkumar.cind@gmail.com"
   }
 }
