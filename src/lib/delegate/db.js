@@ -17,7 +17,6 @@ class Db {
 
     /**
     * Query to show all database with information
-    *
     * @returns promise
     * @memberof Db
     */

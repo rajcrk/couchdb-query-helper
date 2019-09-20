@@ -7,7 +7,7 @@ Presently can only be used on the NodeJS version 8 or higher.Supports CouchDb ve
 
 
 ## Installation
-```shell
+```sh
 npm i couchdb-query-helper
 ```
 ## How to use

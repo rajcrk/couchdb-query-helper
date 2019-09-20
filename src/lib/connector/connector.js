@@ -3,7 +3,8 @@ const axios = require('axios');
 class Connector {
     constructor() {
         /**
-         * 
+         * The configuration database
+         * @var {object}
          */
         this.connection = {
             host: 'http://127.0.0.1',
@@ -37,26 +38,52 @@ class Connector {
         };
     }
 
+    /**
+     * Function to check if database connected or not
+     * @param {*} callback
+     * @memberof Connector
+     */
     async testConnection(callback) {
-        await axios.get('http://127.0.0.1:5984/')
+        await axios.get(`${this.connection.host}:${this.connection.port}`)
             .then(response => callback(response, null))
             .catch(error => callback(null, error));
     }
 
+    /**
+     * 
+     * @param {*} _databaseName 
+     * @param {*} callback
+     * @memberof Connector
+     */
     async selectAll(_databaseName, callback) {
-        await axios.get(`http://127.0.0.1:5984/${_databaseName}/_all_docs`)
+        await axios.get(`${this.connection.host}:${this.connection.port}/${_databaseName}/_all_docs`)
             .then(response => callback(response, null))
             .catch(error => callback(null, error));
     }
 
+    /**
+     * 
+     * @param {*} _id 
+     * @param {*} _document 
+     * @param {*} _databaseName 
+     * @param {*} callback
+     * @memberof Connector
+     */
     async insertDocument(_id, _document, _databaseName, callback) {
-        await axios.put(`http://127.0.0.1:5984/${_databaseName}/${_id}`, _document)
+        await axios.put(`${this.connection.host}:${this.connection.port}/${_databaseName}/${_id}`, _document)
             .then(response => callback(response, null))
             .catch(error => callback(null, error));
     }
 
+    /**
+     * 
+     * @param {*} _id 
+     * @param {*} _databaseName 
+     * @param {*} callback 
+     * @memberof Connector
+     */
     async deleteDocument(_id, _databaseName, callback) {
-        await axios.delete(`http://127.0.0.1:5984/${_databaseName}/${_id}`)
+        await axios.delete(`${this.connection.host}:${this.connection.port}/${_databaseName}/${_id}`)
             .then(response => callback(response, null))
             .catch(error => callback(null, error));
     }
