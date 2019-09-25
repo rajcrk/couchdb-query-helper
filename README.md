@@ -17,8 +17,10 @@ couchdb-query-helper module is itself a function which takes a configuration obj
 const queryHelper = require('couchdb-query-helper')
   .connection({
     host: 'localhost',
-    user: 'root',
-    port: '5984'
+    protocol: 'http://',
+    port: '5984',
+    user: 'admin',
+    pass: 'admin'
   });
 ```
 ### Retrieving results
@@ -54,3 +56,14 @@ queryHelper
     .then((responseData) => console.log(responseData)) 
     .catch((err) => console.log(err));
 ```
+#### Select with condition (In Developement)
+```array_of_key``` represents the key that you are searching for and ```array_of_values``` represents the values that the key should have.
+
+```js
+ queryHelper
+    .query()
+    .select(array_of_key, array_of_values, databaseName)
+    .then((responseData) => console.log(responseData)) 
+    .catch((err) => console.log(err));
+```
+

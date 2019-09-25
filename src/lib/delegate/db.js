@@ -1,5 +1,4 @@
 const Connector = require('../connector/connector');
-const axios = require('axios');
 
 class Db {
     /**
@@ -10,7 +9,7 @@ class Db {
         return new Promise((resolve, reject) => {
             Connector.testConnection((results, err) => {
                 if (err) reject(err);
-                else resolve(results.data);
+                else resolve(results);
             });
         });
     }
@@ -22,12 +21,13 @@ class Db {
     */
     showDatabases() {
         return new Promise((resolve, reject) => {
-            axios.get('http://127.0.0.1:5984/_all_dbs')
-                .then(response => resolve(response))
-                .catch(error => reject(error));
+            Connector.showDatabases((results, err) => {
+                if (err) reject(err);
+                else resolve(results.data);
+            })
         });
     }
-    
+
 }
 
 module.exports = new Db();

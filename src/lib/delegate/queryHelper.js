@@ -1,6 +1,5 @@
-const axios = require('axios');
-const Connector = require('couchdb-query-helper/src/lib/connector/connector');
-
+const Connector = require('../connector/connector');
+const selectFormatterUtils = require('../utils/selectorFormatter.utils');
 class QueryHelper {
 
   /**
@@ -10,24 +9,31 @@ class QueryHelper {
    * @param {*} _databaseName 
    * @memberof QueryHelper
    */
-  async insert(_id, _document, _databaseName)  {
+  async insert(_id, _document, _databaseName) {
     return new Promise((resolve, reject) => {
       Connector.insertDocument(_id, _document, _databaseName, (results, err) => {
-        if (err) {
-          console.log(err);
-          reject(err)
-        }
+        if (err) reject(err);
         else resolve(results.data);
       });
     });
   }
 
-  async update() {
-
-  }
-
-  async select() {
-
+  /**
+   * 
+   * @param {*} fields 
+   * @param {*} values 
+   * @param {*} _databaseName 
+   */
+  async select(fields, values, _databaseName) {
+    return new Promise(async (resolve, reject) => {
+      if (fields.length != values.length) { reject('The number of fields and values should be same !'); }
+      var selectJSONCondition = await selectFormatterUtils.formatSelectCondition(fields, values);
+      var selector = { "selector": JSON.parse(selectJSONCondition) };
+      Connector.selectWithCondition(selector, _databaseName, (results, err) => {
+        if (err) reject(err);
+        else resolve(results.data);
+      });
+    });
   }
 
   /**
@@ -39,10 +45,7 @@ class QueryHelper {
   async delete(_id, _databaseName) {
     return new Promise((resolve, reject) => {
       Connector.deleteDocument(_id, _databaseName, (results, err) => {
-        if (err) {
-          console.log(err);
-          reject(err)
-        }
+        if (err) reject(err)
         else resolve(results.data);
       });
     });

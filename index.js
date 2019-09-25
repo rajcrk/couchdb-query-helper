@@ -1,3 +1,3 @@
-const CouchBuilder = require('couchdb-query-helper/src/lib/builder');
+const CouchBuilder = require('./src/lib/builder');
 
 module.exports = CouchBuilder;

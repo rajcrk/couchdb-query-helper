@@ -9,7 +9,6 @@ class Builder {
      */
     connection(config) {
         Connector.connection = config;
-
         return this;
     }
 
@@ -20,14 +19,8 @@ class Builder {
      * @memberof Builder
      */
     db() {
-        const db = require('couchdb-query-helper/src/lib/delegate/db');
+        const db = require('./delegate/db');
         return db;
-    }
-
-    insert(...args) {
-        return new Promise((resolve, reject) => {
-
-        })
     }
 
     query() {

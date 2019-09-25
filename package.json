@@ -1,7 +1,7 @@
 {
   "name": "couchdb-query-helper",
-  "version": "1.1.2",
-  "description": "A module to help query couch DB in node applications",
+  "version": "1.1.4",
+  "description": "Module to help query couchDB in NodeJs applications",
   "main": "index.js",
   "scripts": {
     "test": "mocha --timeout 30000 --exit"

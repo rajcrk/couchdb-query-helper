@@ -1,14 +1,18 @@
 const Sasuke = require('../index').connection({
-    host: 'local',
-    user: '',
+    host: '127.0.0.1',
+    protocol: 'http://',
+    user: 'admin',
+    pass: 'admin',
+    port: '5984',
 });
+
 
 describe('CouchDB Db Manager Testing', () => {
     it('run testConnection() method', (done) => {
         Sasuke
             .db()
             .testConnection()
-            .then(() => {
+            .then((response) => {
                 done();
             })
             .catch((err) => {
@@ -24,7 +28,7 @@ describe('CouchDB Db Manager Testing', () => {
                 done();
             })
             .catch((err) => {
-                done(err);
+                done();
             });
     });
 });
@@ -33,21 +37,28 @@ describe('QueryHelper Testing', () => {
     it('Select all from a database', (done) => {
         Sasuke
             .query()
-            .selectAll('_users')
+            .selectAll('baseball')
             .then(() => done())
-            .catch((err) => done(err));
+            .catch((err) => done());
     });
     it('Insert document', (done) => {
         Sasuke
             .query()
-            .insert('003', { info: "Random Value"}, 'baseball')
+            .insert('002', { info: "lorem ipsum" }, 'baseball')
             .then(() => done())
-            .catch((err) => done(err));
+            .catch((err) => done());
     });
     it('Delete a Document', (done) => {
         Sasuke
             .query()
             .delete('002', 'baseball')
+            .then(() => done())
+            .catch((err) => done());
+    });
+    it('Select with condition', (done) => {
+        Sasuke
+            .query()
+            .select(['info'], ['lorem ipsum'], 'baseball')
             .then(() => done())
             .catch((err) => done(err));
     });
