@@ -1,6 +1,6 @@
 {
   "name": "couchdb-query-helper",
-  "version": "1.1.4",
+  "version": "1.1.6",
   "description": "Module to help query couchDB in NodeJs applications",
   "main": "index.js",
   "scripts": {
@@ -12,6 +12,7 @@
     "axios": "^0.19.0"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
     "mocha": "^6.2.0"
   },
   "keywords": [

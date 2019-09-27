@@ -67,3 +67,30 @@ queryHelper
     .catch((err) => console.log(err));
 ```
 
+#### Creating a new database
+```js
+    queryHelper
+        .db()
+        .createDatabase(dbName)
+        .then((responseData) => console.log(responseData)) 
+        .catch((err) => console.log(err));
+```
+#### Drop a database
+```js
+    queryHelper
+        .db()
+        .dropDatabase(dbName)
+        .then((responseData) => console.log(responseData)) 
+        .catch((err) => console.log(err));
+```
+#### Run your regular find with custom queries
+You can use the regular JSON object for queries, to know more about the select option visit http://docs.couchdb.org/en/stable/api/database/find.html
+
+```js
+    queryHelper
+        .query()
+        .bareSelect(dbName, selectorSample)
+        .then((responseData) => console.log(responseData)) 
+        .catch((err) => console.log(err));
+```
+

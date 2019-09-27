@@ -2,10 +2,6 @@ const axios = require('axios');
 
 class Connector {
     constructor() {
-        /**
-         * The configuration database
-         * @var {object}
-         */
         this.connection = {
             host: '127.0.0.1',
             port: '5984',
@@ -13,6 +9,18 @@ class Connector {
             pass: null,
             protocol: 'http://'
         };
+    }
+
+    /**
+     * Creates a database. Returns a promise which is
+     * - resolved with no arguments
+     * - rejected with `request` original error
+     * @param {*} dbName 
+     */
+    async createDatabase(dbName, callback) {
+        await axios.put(`${this.connection.protocol}${this.connection.user}:${this.connection.pass}@${this.connection.host}:${this.connection.port}/${dbName}`)
+            .then(response => callback(response, null))
+            .catch(error => callback(null, error));
     }
 
     /**
@@ -27,7 +35,7 @@ class Connector {
     }
 
     /**
-     * 
+     * Select all documents from a database
      * @param {*} _databaseName 
      * @param {*} callback
      * @memberof Connector
@@ -39,7 +47,7 @@ class Connector {
     }
 
     /**
-     * 
+     * insert a JSON document into a database
      * @param {*} _id 
      * @param {*} _document 
      * @param {*} _databaseName 
@@ -53,7 +61,7 @@ class Connector {
     }
 
     /**
-     * 
+     * Delete a document by specifying the document id
      * @param {*} _id 
      * @param {*} _databaseName 
      * @param {*} callback 
@@ -66,7 +74,7 @@ class Connector {
     }
 
     /**
-     * 
+     * Get the list of databases
      * @param {*} callback 
      * @memberof Connector
      */
@@ -84,6 +92,24 @@ class Connector {
      */
     async selectWithCondition(selectorObject, _databaseName, callback) {
         await axios.post(`${this.connection.protocol}${this.connection.host}:${this.connection.port}/${_databaseName}/_find`, selectorObject)
+            .then(response => callback(response, null))
+            .catch(error => callback(null, error));
+    }
+
+    async dropDatabase(_db, callback) {
+        await axios.delete(`${this.connection.protocol}${this.connection.user}:${this.connection.pass}@${this.connection.host}:${this.connection.port}/${_db}`)
+        .then(response => callback(response, null))
+        .catch(error => callback(null, error));
+    }
+
+    async getUuids(callback) {
+        await axios.get(`${this.connection.protocol}${this.connection.user}:${this.connection.pass}@${this.connection.host}:${this.connection.port}/_uuids`)
+        .then(response => callback(response, null))
+        .catch(error => callback(null, error));
+    }
+
+    async bareSelect(_databaseName, _query, callback) {
+        await axios.post(`${this.connection.protocol}${this.connection.host}:${this.connection.port}/${_databaseName}/_find`, _query)
             .then(response => callback(response, null))
             .catch(error => callback(null, error));
     }

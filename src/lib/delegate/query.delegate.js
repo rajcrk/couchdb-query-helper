@@ -27,12 +27,25 @@ class QueryHelper {
   async select(fields, values, _databaseName) {
     return new Promise(async (resolve, reject) => {
       if (fields.length != values.length) { reject('The number of fields and values should be same !'); }
-      var selectJSONCondition = await selectFormatterUtils.formatSelectCondition(fields, values);
-      var selector = { "selector": JSON.parse(selectJSONCondition) };
+      let selectJSONCondition = await selectFormatterUtils.formatSelectCondition(fields, values);
+      let selector = { "selector": JSON.parse(selectJSONCondition) };
       Connector.selectWithCondition(selector, _databaseName, (results, err) => {
         if (err) reject(err);
         else resolve(results.data);
       });
+    });
+  }
+
+  /**
+   * 
+   * @param {*} query 
+   */
+  async bareSelect(databaseName, query) {
+    return new Promise(async (resolve, reject) => {
+      Connector.bareSelect(databaseName, query, (results, err) => {
+        if(err) reject(err);
+        else resolve(results.data);
+      })
     });
   }
 

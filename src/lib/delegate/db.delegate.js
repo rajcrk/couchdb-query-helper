@@ -1,6 +1,32 @@
 const Connector = require('../connector/connector');
 
 class Db {
+
+    /**
+     * 
+     * @param {*} dbName 
+     */
+    createDatabase(dbName) {
+        return new Promise((resolve, reject) => {
+            Connector.createDatabase(dbName, (results, err) => {
+                if (err) reject(err)
+                else resolve(results)
+            });
+        });
+    }
+
+    /**
+     * 
+     * @param {*} db 
+     */
+    dropDatabase(db) {
+        return new Promise((resolve, reject) => {
+            Connector.dropDatabase(db, (results, err) => {
+                if (err) reject(err)
+                else resolve(results)
+            });
+        }); 
+    }
     /**
      * @returns promise
      * @memberof Db

@@ -2,6 +2,7 @@ const Connector = require('./connector/connector');
 
 
 class Builder {
+
     /**
      * 
      * @param {*} config
@@ -14,18 +15,27 @@ class Builder {
 
     /**
      * Run database builder
-     * 
      * @returns object
      * @memberof Builder
      */
     db() {
-        const db = require('./delegate/db');
+        const db = require('./delegate/db.delegate');
         return db;
     }
 
+    /**
+     * 
+     * @returns object
+     * @memberof Builder
+     */
     query() {
-        const query = require('./delegate/queryHelper');
+        const query = require('./delegate/query.delegate');
         return query;
+    }
+
+    couch() {
+        const couch = require('./delegate/couch.delegate');
+        return couch;
     }
 }
 
