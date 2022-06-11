@@ -1,8 +1,10 @@
 const Connector = require('../connector/connector');
 const selectFormatterUtils = require('../utils/selectorFormatter.utils');
+
 class QueryHelper {
 
   /**
+   * Query helper method to insert data to couch DB.
    * 
    * @param {*} _id 
    * @param {*} _document 
@@ -19,6 +21,7 @@ class QueryHelper {
   }
 
   /**
+   * Query helper method to select data from couch DB.
    * 
    * @param {*} fields 
    * @param {*} values 
@@ -37,6 +40,7 @@ class QueryHelper {
   }
 
   /**
+   * Query helper method to bare select data from courch DB.
    * 
    * @param {*} query 
    */
@@ -65,6 +69,8 @@ class QueryHelper {
   }
 
   /**
+   * Query helper to select all data from couch DB.
+   * 
    * @memberof QueryHelper
    * @param {*} _databaseName 
    */
